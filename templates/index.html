@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock & Weather Display</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/theme.js') }}" defer></script>
+</head>
+<body class="{{ weather.mode }}">
+    <div class="container">
+        <div class="current">
+            <div class="time">{{ weather.time }}</div>
+            <div class="temperature">
+                {{ weather.temperature }}°F
+                <img src="{{ url_for('static', filename='icons/' + weather.icon + '.svg') }}" alt="weather icon" class="weather-icon" />
+            </div>
+        </div>
+        <div class="forecast-row">
+            {% for day in weather.forecast %}
+            <div class="forecast-card">
+                <div class="day">{{ day.day }}</div>
+                <img src="{{ url_for('static', filename='icons/' + day.icon + '.svg') }}" alt="icon" class="small-icon" />
+                <div class="temps">{{ day.high }}° / {{ day.low }}°</div>
+            </div>
+            {% endfor %}
+        </div>
+        <button id="themeToggle">🌓</button>
+    </div>
+</body>
+</html>

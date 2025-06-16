@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.current .time {
+    font-size: 5rem;
+    font-weight: 700;
+}
+
+.current .temperature {
+    font-size: 2.5rem;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.weather-icon {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.forecast-row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.forecast-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 15px;
+    min-width: 70px;
+    transition: background-color 0.3s ease;
+}
+
+.forecast-card .day {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.forecast-card .temps {
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.small-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* THEME COLORS */
+body.light {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+body.dark {
+    background-color: #2e2e2e;
+    color: #f0f0f0;
+}
+
+body.darker {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+#themeToggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    transition: transform 0.2s;
+}
+
+#themeToggle:hover {
+    transform: scale(1.2);
+}
