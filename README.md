@@ -1,6 +1,8 @@
 # Clock Weather Display
 
 A small Flask application that shows the current time and weather forecast.
+The display updates automatically every minute using data from the server so
+the clock stays accurate even if the device time drifts.
 
 ## Setup
 
