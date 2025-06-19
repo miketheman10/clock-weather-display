@@ -4,83 +4,102 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    min-height: 100vh;
+    transition: background 0.5s ease, color 0.5s ease;
 }
 
 .container {
     text-align: center;
     width: 100%;
-    max-width: 800px;
-    padding: 20px;
+    max-width: 900px;
+    padding: 40px;
     box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .current .time {
-    font-size: 5rem;
+    font-size: 6.5rem;
     font-weight: 700;
 }
 
 .current .temperature {
-    font-size: 2.5rem;
-    margin-top: 10px;
+    font-size: 3.5rem;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+}
+
+.summary {
+    margin-left: 15px;
+    font-size: 1.5rem;
 }
 
 .weather-icon {
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 90px;
     vertical-align: middle;
 }
 
 .forecast-row {
-    margin-top: 40px;
+    margin-top: 50px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
 }
 
 .forecast-card {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     border-radius: 12px;
-    padding: 10px 15px;
-    min-width: 70px;
-    transition: background-color 0.3s ease;
+    padding: 15px 20px;
+    min-width: 90px;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.forecast-card:hover {
+    transform: translateY(-4px);
 }
 
 .forecast-card .day {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 5px;
 }
 
 .forecast-card .temps {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin-top: 5px;
 }
 
 .small-icon {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
+}
+
+.error {
+    margin-top: 20px;
+    font-size: 1.2rem;
 }
 
 /* THEME COLORS */
 body.light {
-    background-color: #e0e0e0;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     color: #000;
 }
 
 body.dark {
-    background-color: #2e2e2e;
+    background: linear-gradient(135deg, #434343, #222222);
     color: #f0f0f0;
 }
 
 body.darker {
-    background-color: #1a1a1a;
+    background: linear-gradient(135deg, #111111, #000000);
     color: #ffffff;
 }
 
@@ -88,7 +107,7 @@ body.darker {
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     background: none;
     border: none;
     cursor: pointer;
