@@ -11,61 +11,70 @@ body {
 .container {
     text-align: center;
     width: 100%;
-    max-width: 800px;
-    padding: 20px;
+    max-width: 1000px;
+    padding: 30px;
     box-sizing: border-box;
 }
 
 .current .time {
-    font-size: 5rem;
+    font-size: 6rem;
     font-weight: 700;
 }
 
 .current .temperature {
-    font-size: 2.5rem;
-    margin-top: 10px;
+    font-size: 3rem;
+    margin-top: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+}
+
+.summary {
+    margin-left: 10px;
 }
 
 .weather-icon {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     vertical-align: middle;
 }
 
 .forecast-row {
-    margin-top: 40px;
+    margin-top: 50px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
 }
 
 .forecast-card {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    padding: 10px 15px;
-    min-width: 70px;
+    padding: 15px 20px;
+    min-width: 90px;
     transition: background-color 0.3s ease;
 }
 
 .forecast-card .day {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 5px;
 }
 
 .forecast-card .temps {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin-top: 5px;
 }
 
 .small-icon {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+}
+
+.error {
+    margin-top: 20px;
+    font-size: 1.2rem;
 }
 
 /* THEME COLORS */
