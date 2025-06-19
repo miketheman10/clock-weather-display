@@ -24,15 +24,15 @@ def get_weather():
 
         current = data['currently']
         daily = data['daily']['data'][:4]  # Next 4 days
-        sunset = datetime.datetime.fromtimestamp(daily[0]['sunsetTime'], TZ).time()
 
         now = datetime.datetime.now(TZ).time()
-        mode = "light"
 
-        if now > sunset:
-            mode = "dark"
-        if now >= datetime.time(23, 0):
+        if datetime.time(23, 0) <= now or now < datetime.time(8, 30):
             mode = "darker"
+        elif datetime.time(8, 30) <= now <= datetime.time(18, 30):
+            mode = "light"
+        else:
+            mode = "dark"
 
         return {
             "time": datetime.datetime.now(TZ).strftime("%-I:%M %p"),
@@ -57,6 +57,8 @@ def get_weather():
 @app.route("/")
 def home():
     weather = get_weather()
+    if not weather:
+        return render_template("index.html", weather=None)
     return render_template("index.html", weather=weather)
 
 if __name__ == "__main__":
