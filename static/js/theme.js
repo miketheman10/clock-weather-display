@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const toggleButton = document.getElementById("themeToggle");
+    window.manualMode = false;
 
     toggleButton.addEventListener("click", () => {
         const body = document.body;
@@ -16,10 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         body.classList.remove("light", "dark", "darker");
         body.classList.add(nextMode);
+        window.manualMode = true;
     });
-
-    // Auto-refresh every 5 minutes
-    setTimeout(() => {
-        window.location.reload();
-    }, 300000);
 });
