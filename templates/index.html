@@ -7,9 +7,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script src="{{ url_for('static', filename='js/theme.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/update.js') }}" defer></script>
 </head>
 <body class="{{ weather.mode if weather else 'light' }}">
     <div class="container">
+
+        <div id="currentContainer">
+        {% if weather %}
+            <div class="current">
+                <div class="time" id="time">{{ weather.time }}</div>
+                <div class="temperature" id="temperature">
+                    <span id="tempValue">{{ weather.temperature }}°F</span>
+                    <span class="summary" id="summary">{{ weather.summary }}</span>
+                    <img id="weatherIcon" src="{{ url_for('static', filename='icons/' + weather.icon + '.svg') }}" alt="weather icon" class="weather-icon" />
+                </div>
+
         {% if weather %}
         <div class="current">
             <div class="time">{{ weather.time }}</div>
@@ -17,9 +29,14 @@
                 {{ weather.temperature }}°F
                 <span class="summary">{{ weather.summary }}</span>
                 <img src="{{ url_for('static', filename='icons/' + weather.icon + '.svg') }}" alt="weather icon" class="weather-icon" />
+
             </div>
+        {% else %}
+            <p class="error">Weather data is currently unavailable.</p>
+        {% endif %}
         </div>
-        <div class="forecast-row">
+        <div class="forecast-row" id="forecastRow">
+        {% if weather %}
             {% for day in weather.forecast %}
             <div class="forecast-card">
                 <div class="day">{{ day.day }}</div>
@@ -27,6 +44,7 @@
                 <div class="temps">{{ day.high }}° / {{ day.low }}°</div>
             </div>
             {% endfor %}
+        {% endif %}
         </div>
         {% else %}
         <p class="error">Weather data is currently unavailable.</p>
