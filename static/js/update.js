@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+    let timeOffset = 0;
+
+    function formatTime(date) {
+        return date.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+        });
+    }
+
+    function updateClock() {
+        const now = new Date(Date.now() + timeOffset);
+        document.getElementById("time").textContent = formatTime(now);
+    }
+
     async function fetchData() {
         try {
             const res = await fetch("/api");
@@ -12,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateDOM(data) {
-        document.getElementById("time").textContent = data.time;
+        timeOffset = data.timestamp * 1000 - Date.now();
+        updateClock();
+
         document.getElementById("tempValue").textContent = data.temperature + "\u00B0F";
         document.getElementById("summary").textContent = data.summary;
         const icon = document.getElementById("weatherIcon");
@@ -31,5 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     fetchData();
-    setInterval(fetchData, 60000);
+    setInterval(fetchData, 600000);
+    setInterval(updateClock, 1000);
 });

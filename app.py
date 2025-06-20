@@ -70,8 +70,10 @@ def get_weather():
             mode = "dark"
             
 
+        now_ts = datetime.datetime.now(TZ)
         return {
-            "time": datetime.datetime.now(TZ).strftime("%-I:%M %p"),
+            "time": now_ts.strftime("%-I:%M %p"),
+            "timestamp": int(now_ts.timestamp()),
             "temperature": round(current["temperature"]),
             "summary": current["summary"],
             "icon": current["icon"],
