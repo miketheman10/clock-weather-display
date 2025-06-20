@@ -11,6 +11,7 @@
 </head>
 <body class="{{ weather.mode if weather else 'light' }}">
     <div class="container">
+
         <div id="currentContainer">
         {% if weather %}
             <div class="current">
@@ -20,6 +21,15 @@
                     <span class="summary" id="summary">{{ weather.summary }}</span>
                     <img id="weatherIcon" src="{{ url_for('static', filename='icons/' + weather.icon + '.svg') }}" alt="weather icon" class="weather-icon" />
                 </div>
+
+        {% if weather %}
+        <div class="current">
+            <div class="time">{{ weather.time }}</div>
+            <div class="temperature">
+                {{ weather.temperature }}°F
+                <span class="summary">{{ weather.summary }}</span>
+                <img src="{{ url_for('static', filename='icons/' + weather.icon + '.svg') }}" alt="weather icon" class="weather-icon" />
+
             </div>
         {% else %}
             <p class="error">Weather data is currently unavailable.</p>
@@ -36,6 +46,9 @@
             {% endfor %}
         {% endif %}
         </div>
+        {% else %}
+        <p class="error">Weather data is currently unavailable.</p>
+        {% endif %}
         <button id="themeToggle">🌓</button>
     </div>
 </body>

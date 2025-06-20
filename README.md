@@ -1,8 +1,11 @@
 # Clock Weather Display
 
+
 This project is a small Flask application that shows the current time and weather forecast. It is designed to run full-screen on a device such as a Raspberry Pi, turning it into a simple dashboard.
 
 The server retrieves data from the Pirate Weather API and caches the response for ten minutes. JavaScript on the client polls the server once per minute so the clock stays accurate even if the device time drifts.
+A small Flask application that shows the current time and weather forecast.
+
 
 ## Setup
 
@@ -12,17 +15,25 @@ The server retrieves data from the Pirate Weather API and caches the response fo
 PIRATE_WEATHER_API_KEY=your_api_key_here
 ```
 
+
 2. Install the required dependencies:
+=======
+2. Install dependencies:
+
 
 ```
 pip install flask python-dotenv requests pytz
 ```
 
+
 3. Launch the application:
+=======
+3. Run the application:
 
 ```
 python app.py
 ```
+
 
 Visit `http://localhost:5000` in your browser.
 
@@ -71,3 +82,5 @@ The application requires a free [Pirate Weather](https://pirateweather.net/) API
 
 On a Raspberry Pi you can install the dependencies using the same `pip` command. Run the server with `python app.py` and open the device’s browser to `http://localhost:5000`. Set the browser to full screen (usually `F11`) for the best effect.
 
+=======
+The app will be available on `http://localhost:5000`.
