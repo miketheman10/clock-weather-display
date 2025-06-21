@@ -5,6 +5,7 @@ This project is a small Flask application that shows the current time and weathe
 
 The server retrieves data from the Pirate Weather API and caches the response for ten minutes. JavaScript on the client polls the server once per minute so the clock stays accurate even if the device time drifts.
 A small Flask application that shows the current time and weather forecast.
+It now includes a detailed view with hourly forecasts and an embedded radar map.
 
 
 ## Setup
@@ -43,7 +44,8 @@ Visit `http://localhost:5000` in your browser.
 clock-weather-display/
 ├── app.py                # Flask server
 ├── templates/
-│   └── index.html        # HTML page served to the client
+│   ├── index.html        # Homepage
+│   └── detail.html       # Detailed hourly forecast with radar
 ├── static/
 │   ├── css/style.css     # Styles for light/dark/darker themes
 │   ├── js/theme.js       # Manual theme toggle logic
@@ -54,10 +56,11 @@ clock-weather-display/
 
 ### Server
 
-`app.py` exposes two routes:
+`app.py` exposes several routes:
 
 - `/` – renders `index.html` with current weather data embedded in the page.
 - `/api` – returns the same data in JSON format so the client can refresh without reloading.
+- `/day/<idx>` – detailed hourly forecast and radar map for the selected day.
 
 The `get_weather()` helper fetches forecast information from Pirate Weather. Results are cached for 10 minutes in the `_cache` dictionary to avoid unnecessary API calls. Each request recalculates the theme mode based on the current time of day:
 

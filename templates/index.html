@@ -26,13 +26,16 @@
         <div class="forecast-row" id="forecastRow">
         {% if weather %}
             {% for day in weather.forecast %}
-            <div class="forecast-card">
+            <a href="{{ url_for('day_detail', idx=loop.index0) }}" class="forecast-card">
                 <div class="day">{{ day.day }}</div>
                 <img src="{{ url_for('static', filename='icons/' + day.icon + '.svg') }}" alt="icon" class="small-icon" />
                 <div class="temps">{{ day.high }}° / {{ day.low }}°</div>
-            </div>
+            </a>
             {% endfor %}
         {% endif %}
+        </div>
+        <div class="detail-button-row">
+            <a id="detailButton" href="{{ url_for('day_detail', idx=0) }}">Detailed Forecast</a>
         </div>
         {% else %}
         <p class="error">Weather data is currently unavailable.</p>

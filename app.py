@@ -23,8 +23,9 @@ _cache = {
 
 
 def _fetch_weather():
+    """Fetch full weather data including hourly information."""
     url = (
-        f"https://api.pirateweather.net/forecast/{API_KEY}/{LAT},{LON}?exclude=minutely,hourly,alerts,flags&units=us"
+        f"https://api.pirateweather.net/forecast/{API_KEY}/{LAT},{LON}?exclude=minutely,alerts,flags&units=us"
     )
     response = requests.get(url)
     return response.json()
@@ -84,6 +85,39 @@ def get_weather():
         print(f"Error fetching weather: {e}")
         return None
 
+
+def get_hourly_forecast(day_index: int):
+    """Return hourly forecast data for the given day index."""
+    now_dt = datetime.datetime.now(TZ)
+    if (
+        _cache["data"]
+        and _cache["timestamp"]
+        and (now_dt - _cache["timestamp"]).total_seconds() < 600
+    ):
+        data = _cache["data"]
+    else:
+        data = _fetch_weather()
+        _cache["timestamp"] = now_dt
+        _cache["data"] = data
+
+    start_date = now_dt.date() + datetime.timedelta(days=day_index)
+    hourly_data = []
+    for hour in data.get("hourly", {}).get("data", []):
+        dt = datetime.datetime.fromtimestamp(hour["time"], TZ)
+        if dt.date() == start_date:
+            hourly_data.append(
+                {
+                    "time": dt.strftime("%-I %p"),
+                    "temperature": round(hour["temperature"]),
+                    "icon": hour.get("icon", "clear-day"),
+                    "summary": hour.get("summary", ""),
+                }
+            )
+    return {
+        "day": start_date.strftime("%A %B %-d"),
+        "hourly": hourly_data,
+    }
+
 @app.route("/")
 def home():
     weather = get_weather()
@@ -99,6 +133,19 @@ def api():
     if not weather:
         return jsonify({"error": "Weather data unavailable"}), 500
     return jsonify(weather)
+
+
+@app.route("/day/<int:idx>")
+def day_detail(idx):
+    """Show hourly forecast and radar for the selected day."""
+    forecast = get_hourly_forecast(idx)
+    radar_url = (
+        "https://embed.windy.com/embed2.html?lat="
+        f"{LAT}&lon={LON}&detailLat={LAT}&detailLon={LON}&width=650&height=450&zoom=5"
+        "&level=surface&overlay=radar&menu=&message=true&marker=&calendar=&pressure="
+        "&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default"
+    )
+    return render_template("detail.html", forecast=forecast, radar_url=radar_url)
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0")
