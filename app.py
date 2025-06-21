@@ -53,14 +53,6 @@ def get_weather():
 
         now = datetime.datetime.now(TZ).time()
 
-
-        if datetime.time(23, 0) <= now or now < datetime.time(8, 30):
-            mode = "darker"
-        elif datetime.time(19, 0) <= now:
-            mode = "dark"
-        else:
-            mode = "light"
-
         # Theme logic
         if datetime.time(23, 0) <= now or now < datetime.time(8, 30):
             mode = "darker"
