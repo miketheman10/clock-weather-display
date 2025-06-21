@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detailed Forecast</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="{{ url_for('static', filename='js/theme.js') }}" defer></script>
+</head>
+<body class="light">
+    <div class="container">
+        <h2>{{ forecast.day }}</h2>
+        <div class="hourly-forecast">
+            {% for h in forecast.hourly %}
+            <div class="hour-card">
+                <div class="hour-time">{{ h.time }}</div>
+                <img src="{{ url_for('static', filename='icons/' + h.icon + '.svg') }}" class="small-icon" alt="icon" />
+                <div class="hour-temp">{{ h.temperature }}°F</div>
+                <div class="hour-summary">{{ h.summary }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="radar">
+            <iframe src="{{ radar_url }}" width="650" height="450" frameborder="0"></iframe>
+        </div>
+        <p><a href="{{ url_for('home') }}">Back</a></p>
+    </div>
+</body>
+</html>
