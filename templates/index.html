@@ -22,18 +22,6 @@
                     <img id="weatherIcon" src="{{ url_for('static', filename='icons/' + weather.icon + '.svg') }}" alt="weather icon" class="weather-icon" />
                 </div>
 
-        {% if weather %}
-        <div class="current">
-            <div class="time">{{ weather.time }}</div>
-            <div class="temperature">
-                {{ weather.temperature }}°F
-                <span class="summary">{{ weather.summary }}</span>
-                <img src="{{ url_for('static', filename='icons/' + weather.icon + '.svg') }}" alt="weather icon" class="weather-icon" />
-
-            </div>
-        {% else %}
-            <p class="error">Weather data is currently unavailable.</p>
-        {% endif %}
         </div>
         <div class="forecast-row" id="forecastRow">
         {% if weather %}
