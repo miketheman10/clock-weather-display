@@ -96,13 +96,18 @@ body.light {
 }
 
 body.dark {
-    background: linear-gradient(135deg, #434343, #222222);
-    color: #f0f0f0;
+    background: linear-gradient(135deg, #222222, #000000);
+    color: #90ee90;
 }
 
 body.darker {
-    background: linear-gradient(135deg, #111111, #000000);
-    color: #ffffff;
+    background: #000000;
+    color: #90ee90;
+}
+
+body.dark .container,
+body.darker .container {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 #themeToggle {

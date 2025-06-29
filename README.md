@@ -65,6 +65,10 @@ The `get_weather()` helper fetches forecast information from Pirate Weather. Res
 - **dark** – 7:00 PM to 10:59 PM
 - **darker** – 11:00 PM through 8:29 AM
 
+In the dark and darker modes the background is nearly black. During these hours
+the text is rendered in a soft green tone so the display remains readable while
+minimizing brightness at night.
+
 ### Client
 
 The client page (template `index.html`) loads two JavaScript files:
